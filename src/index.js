@@ -4,12 +4,12 @@ const VueLocalDataProp = {
   install: (Vue) => {
     Vue.mixin({
       beforeCreate() {
-		const newData = {};
+        const newData = {};
 
         _.each(this.$options.props, (val, key) => {
-			const propValue = ! _.isUndefined(this.$options.propsData)
-				? this.$options.propsData[key]
-				: undefined;
+          const propValue = !_.isUndefined(this.$options.propsData)
+            ? this.$options.propsData[key]
+            : undefined;
 
           if (_.has(this.$options.props[key], 'localData')) {
             const newVarKey = `local${key.charAt(0).toUpperCase()}${key.slice(1)}`;
@@ -31,7 +31,7 @@ const VueLocalDataProp = {
               this.$options.watch = {};
             }
 
-            this.$options.watch[key] = function (value) {
+            this.$options.watch[key] = function watch(value) {
               if (_.isPlainObject(value)) {
                 this[newVarKey] = _.merge(this[newVarKey], value);
               } else {
